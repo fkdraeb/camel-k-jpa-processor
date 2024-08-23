@@ -9,8 +9,12 @@ import org.example.repository.PlayerRepository;
 @ApplicationScoped
 public class JpaProcessor implements Processor {
 
+    private final PlayerRepository playerRepository;
+
     @Inject
-    PlayerRepository playerRepository;
+    public JpaProcessor(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     @Override
     public void process(Exchange exchange) throws Exception {
