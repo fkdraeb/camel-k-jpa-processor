@@ -9,19 +9,13 @@ import org.example.repository.PlayerRepository;
 @ApplicationScoped
 public class JpaProcessor implements Processor {
 
-    private final PlayerRepository playerRepository;
-
-    @Inject
-    public JpaProcessor(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
-    }
-
     @Override
     public void process(Exchange exchange) throws Exception {
 
-        String playerDesc = playerRepository.findById(1L).getDescPlayer();
+        System.out.println(exchange.getContext().getRegistry().toString());
+        PlayerRepository playerRepository = exchange.getContext().getRegistry().lookupByNameAndType("playerRepository", PlayerRepository.class);
 
-        exchange.getIn().setBody(playerDesc);
+        exchange.getIn().setBody(playerRepository.findById(1L).getDescPlayer());
 
     }
 }
