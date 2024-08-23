@@ -1,14 +1,18 @@
 package org.example.entity;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "HIP_PLAYERS")
-public class Player {
+//public class Player extends PanacheEntity {
+public class Player extends PanacheEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_PLAYER")
     private Integer idPlayer;
 
@@ -108,5 +112,9 @@ public class Player {
 
     public void setIdUser(Integer idUser) {
         this.idUser = idUser;
+    }
+
+    public static Player findByDescPlayer(String descPlayer){
+        return find("descPlayer", descPlayer).firstResult();
     }
 }

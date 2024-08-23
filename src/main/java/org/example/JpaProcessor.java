@@ -1,25 +1,19 @@
 package org.example;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.example.repository.PlayerRepository;
+import org.example.entity.Player;
 
-@ApplicationScoped
 public class JpaProcessor implements Processor {
 
-    private final PlayerRepository playerRepository;
-
-    @Inject
-    public JpaProcessor(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
-    }
-
     @Override
+    @Transactional
     public void process(Exchange exchange) throws Exception {
 
-        String playerDesc = playerRepository.findById(1L).getDescPlayer();
+        Player player = Player.findByDescPlayer("SONHO");
+        String playerDesc = player.getDescPlayer();
 
         exchange.getIn().setBody(playerDesc);
 
