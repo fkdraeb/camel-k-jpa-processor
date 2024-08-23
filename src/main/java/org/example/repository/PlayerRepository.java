@@ -4,7 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.example.entity.Player;
 
-@org.apache.camel.BindToRegistry("playerRepository")
+@ApplicationScoped
 public class PlayerRepository implements PanacheRepository<Player> {
 
 
