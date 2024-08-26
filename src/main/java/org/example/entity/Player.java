@@ -1,13 +1,13 @@
 package org.example.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "HIP_PLAYERS")
+@Table(name = "HIP_PLAYERSZZ")
 //public class Player extends PanacheEntity {
 public class Player extends PanacheEntity {
 
@@ -114,6 +114,7 @@ public class Player extends PanacheEntity {
         this.idUser = idUser;
     }
 
+    @Transactional
     public static Player findByDescPlayer(String descPlayer){
         return find("descPlayer", descPlayer).firstResult();
     }
